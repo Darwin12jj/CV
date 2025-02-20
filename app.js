@@ -49,3 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Función para alternar el menú hamburguesa
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    // Alterna la visibilidad del menú
+    menu.classList.toggle('max-h-0');  // Cierra el menú
+    menu.classList.toggle('opacity-0');  // Hace invisible el menú
+    menu.classList.toggle('max-h-96');  // Abre el menú (la altura máxima se ajusta según el contenido)
+    menu.classList.toggle('opacity-100');  // Hace visible el menú
+    
+    // Cambia la forma de la hamburguesa
+    hamburger.classList.toggle('open');  // Añade o quita la clase 'open' para la animación
+}
+
+// Asegurarse de que el menú esté cerrado cuando se carga la página
+window.addEventListener('DOMContentLoaded', (event) => {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    // Asegura que las clases de 'open' y de mostrar el menú no estén presentes al inicio
+    menu.classList.add('max-h-0', 'opacity-0');  // Menú cerrado y oculto
+    hamburger.classList.remove('open');  // Hamburguesa en estado normal
+});

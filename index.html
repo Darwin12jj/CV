@@ -18,6 +18,7 @@
         .zoom-in {
             transform: scale(0.8);
         }
+
         .zoom-in.visible {
             opacity: 1;
             transform: scale(1);
@@ -26,6 +27,7 @@
         .slide-in-right {
             transform: translateX(25px);
         }
+
         .slide-in-right.visible {
             opacity: 1;
             transform: translateX(0);
@@ -34,6 +36,7 @@
         .slide-in-left {
             transform: translateX(-50px);
         }
+
         .slide-in-left.visible {
             opacity: 1;
             transform: translateX(0);
@@ -72,36 +75,90 @@
                 transform: translateY(20px);
             }
         }
+
+        /* Animación para el cambio del ícono */
+        .hamburger div {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .hamburger.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        header {
+            container-type: scroll-state;
+            position: sticky;
+            top: 0px;
+            z-index: 1;
+
+            >nav {
+                transition: background .3s, color .4s;
+
+                @container scroll-state(stuck: top) {
+                    background: #fff;
+                    color: #000;
+                }
+            }
+        }
     </style>
 
+    <header>
 
-    <nav class="fixed flex justify-center w-full bg-white top-0 z-50" id="sobremi">
-        <div class="flex flex-row justify-end content-center">
-            <ul class="flex p-5 gap-5">
-                <li><button
-                        class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
-                            href="#sobremi">Sobre mí</a></button></li>
-                <li><button
-                        class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
-                            href="#educacion"> Educación</a></button>
-                </li>
-                <li><button
-                        class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in">
-                        <a href="#experiencia"> Experiencia
-                            laboral</a></button></li>
-                <li><button
-                        class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in">
-                        <a href="#proyectos"> Proyectos
-                            personales</a></button></li>
-                <li><button
-                        class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
-                            href="#contacto">Contácto</a></button></li>
-            </ul>
-        </div>
-    </nav>
-    <main class="mt-5 mx-5 mt-20 h-auto sm:h-lvh flex-col justify-center hidden-element slide-in-right border-b-2">
+        <nav class="flex justify-start sm:justify-center w-full bg-white z-50" id="sobremi">
+            <!-- Icono de la hamburguesa (solo en mobile) -->
+            <div class="sm:hidden p-5">
+                <div class="hamburger cursor-pointer w-8 h-8 flex flex-col justify-between items-center transition-all"
+                    onclick="toggleMenu()">
+                    <div class="bg-black h-1 w-6 rounded-full"></div>
+                    <div class="bg-black h-1 w-6 rounded-full"></div>
+                    <div class="bg-black h-1 w-6 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Menú desplegable en móvil -->
+            <div id="mobileMenu"
+                class="sm:hidden hidden-element zoom-in mt-4 space-y-4 text-black max-h-0 overflow-hidden opacity-0 transition-all duration-300">
+                <a href="#sobremi" class="block">Sobre mí</a>
+                <a href="#educacion" class="block">Educación</a>
+                <a href="#experiencia" class="block">Experiencia</a>
+                <a href="#proyectos" class="block">Proyectos</a>
+                <a href="#contacto" class="block">Contácto</a>
+            </div>
+
+            <!-- Menú para pantallas grandes -->
+            <div class="hidden sm:flex flex-row justify-end content-center">
+                <ul class="flex p-5 gap-5">
+                    <li><button
+                            class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
+                                href="#sobremi">Sobre mí</a></button></li>
+                    <li><button
+                            class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
+                                href="#educacion"> Educación</a></button></li>
+                    <li><button
+                            class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
+                                href="#experiencia"> Experiencia laboral</a></button></li>
+                    <li><button
+                            class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
+                                href="#proyectos"> Proyectos personales</a></button></li>
+                    <li><button
+                            class="hover:border-b-2 focus:border-b-2 hover:text-gray-600 transition-all duration-150 ease-in"><a
+                                href="#contacto">Contácto</a></button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-5 mx-20 mt-5 h-auto sm:h-lvh flex-col justify-center slide-in-right border-b-2">
         <div class="flex flex-col text-center">
-            <h1 class="text-6xl font-bold" id="sobremi">DARWIN STIVEN JIMÉNEZ JARAMILLO</h1>
+            <h1 class="text-6xl font-bold" id="sobremi">DARWIN STIVEN JIMENEZ JARAMILLO</h1>
             <span class="font-light pb-5 border-b-2 text-gray-800">TÉCNICO PROFESIONAL EN INGENIERÍA DE SISTEMAS</span>
 
 
@@ -120,7 +177,8 @@
                     desarrollo de software y en aplicar mis habilidades en entornos dinámicos donde pueda seguir
                     creciendo profesionalmente.</p>
 
-                <div id="habilidades-programacion" class="my-10 flex flex-col sm:flex-row justify-around zoom-in hidden-element">
+                <div id="habilidades-programacion"
+                    class="my-10 flex flex-col sm:flex-row justify-around zoom-in hidden-element">
                     <div class="flex flex-col items-center hover:scale-90 transition-all">
                         <img src="./images/icons8-html5-150.svg" alt="HTML5"
                             class="hover:animate-pulse hover:drop-shadow-lg transition-all">
@@ -151,12 +209,17 @@
                             class="hover:animate-pulse hover:drop-shadow-lg transition-all">
                         <span class="font-bold text-gray-800">Python</span>
                     </div>
+                    <div class="flex flex-col items-center hover:scale-90 transition-all mt-5">
+                        <img src="./images/icons8-git.svg" alt="Git"
+                            class="hover:animate-pulse hover:drop-shadow-lg transition-all">
+                        <span class="font-bold text-gray-800">Git</span>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <main class="mt-5 mx-5 flex flex-col h-auto sm:h-lvh justify-center hidden-element slide-in-left border-b-2">
+    <main class="mt-5 mx-20 flex flex-col h-auto sm:h-lvh justify-center hidden-element slide-in-left border-b-2">
 
         <h2 class="font-bold pl-5 text-3xl" id="educacion">Educación</h2>
         <div class="flex flex-col w-full my-5 py-10 sm:flex-row gap-2 justify-center ">
@@ -193,7 +256,7 @@
         </div>
     </main>
 
-    <main class="mx-5 pb-10 flex h-auto h-lvh flex-col justify-center hidden-element slide-in-right border-b-2">
+    <main class="mx-20 pb-10 flex h-auto sm:h-lvh flex-col justify-center hidden-element slide-in-right border-b-2">
 
         <h2 class="font-bold pl-5 text-3xl" id="experiencia">Experiencia laboral</h2>
         <div class="flex flex-col sm:flex-row w-full my-5 px-10 py-5 sm:flex-row gap-5 justify-center">
@@ -211,18 +274,23 @@
         </div>
     </main>
 
-    <main class="mx-5 pb-10 flex flex-col justify-center hidden-element slide-in-left border-b-2">
-        <h2 class="font-bold pl-5 text-3xl mb-5" id="experiencia">Proyectos</h2>
-        <div class="flex flex-row gap-5 h-auto sm:h-lvh sm:gap-10 justify-center items-center text-center hover:">
-            
-            <button class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
-                onclick="showCards('bootstrap')">Bootstrap</button>
-            <button class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
-                onclick="showCards('tailwind')">Tailwind</button>
-            <button class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
-                onclick="showCards('css')">Css puro</button>
-            <button class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
-            onclick="showCards('js')">JavaScript</button>
+    <main class="mx-20 pb-10 flex flex-col justify-center hidden-element slide-in-left border-b-2">
+        <div class="flex flex-col gap-5 h-auto pt-10 sm:pt-25 sm:gap-10 justify-center  text-center">
+            <h2 class="font-bold pl-5 text-3xl mb-5 text-left" id="proyectos">Proyectos</h2>
+            <div class="flex flex-col flex-col justify-center gap-5 sm:flex-row">
+                <button
+                    class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
+                    onclick="showCards('bootstrap')">Bootstrap</button>
+                <button
+                    class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
+                    onclick="showCards('tailwind')">Tailwind</button>
+                <button
+                    class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
+                    onclick="showCards('css')">Css puro</button>
+                <button
+                    class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4"
+                    onclick="showCards('js')">JavaScript</button>
+            </div>
         </div>
 
 
@@ -274,7 +342,7 @@
                         </h5>
                         <a href="https://darwin12jj.github.io/Dropdowns-Example/#" target="_blank">
                             <img src="./images/bootstrap/Footers-Example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg  ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -287,7 +355,7 @@
                         </h5>
                         <a href="https://darwin12jj.github.io/Features_Example/" target="_blank">
                             <img src="./images/bootstrap/Features_Example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -299,7 +367,7 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900">Heroes Example</h5>
                         <a href="https://darwin12jj.github.io/Heroes-example/" target="_blank">
                             <img src="./images/bootstrap/Heroes-example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -312,7 +380,7 @@
                         </h5>
                         <a href="https://darwin12jj.github.io/Headers-Example/" target="_blank">
                             <img src="./images/bootstrap/Headers-Example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -325,7 +393,7 @@
                         </h5>
                         <a href="https://darwin12jj.github.io/Checkout-Example/" target="_blank">
                             <img src="./images/bootstrap/Checkout example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -338,7 +406,7 @@
                         </h5>
                         <a href="https://darwin12jj.github.io/Pricing-examples/" target="_blank">
                             <img src="./images/bootstrap/Pricing-example.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -352,7 +420,7 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900">Modals Example</h5>
                         <a href="https://darwin12jj.github.io/Modals-Example/" target="_blank">
                             <img src="./images/Tailwind/Tailwind-modals-tailwind.png" alt="Bootstrap"
-                                class="rounded-xl w-75 hover:drop-shadow-lg transition-all ease-in hover:scale-110 transition-all">
+                                class="rounded-xl w-75 hover:drop-shadow-lg ease-in hover:scale-110 transition-all">
                         </a>
                     </div>
                 </div>
@@ -425,9 +493,66 @@
             </div>
         </div>
     </main>
-    <footer class="mx-5 pb-10 flex flex-col hidden-element slide-in-right">
-        <h2 class="font-bold pl-5 text-3xl mb-5" id="experiencia">Contácto</h2>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <footer class="mx-20 flex h-auto flex-col justify-center items-start hidden-element slide-in-right">
+
+        <h2 class="font-bold text-3xl py-10 text-left" id="experiencia">Contácto</h2>
+        <div class="flex flex-row items-center w-full justify-center">
+            <div class="flex flex-col sm:flex-row pb-5 justify-center items-center gap-5">
+                <div
+                    class="flex items-center justify-center w-full pb-10 sm:pb-0 sm:pr-10 flex-row sm:flex-col border-b-2 sm:border-b-0 sm:border-r-2">
+                    <form action="" method="POST" id="contacto"
+                        class="flex flex-col justify-center p-6 bg-white border border-gray-200 rounded-lg">
+                        <span class="mb-5 text-center font-bold text-gray-700">¡Cuentame tu problema!</span>
+                        <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                        <input type="text"
+                            class="shadow appearance-none border-gray-200 border rounded w-full py-2 px-3 text-gray-700 leading-tight hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4 hidden-element slide-in-left"
+                            id="nombre" name="nombre" required>
+                        <br><br>
+
+                        <label for="correo" class="block text-gray-700  text-sm font-bold mb-2">Correo
+                            Electrónico:</label>
+                        <input type="email"
+                            class="shadow appearance-none border-gray-200 border rounded w-full py-2 px-3 text-gray-700 leading-tight hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4 hidden-element slide-in-left"
+                            id="correo" name="correo" required>
+                        <br><br>
+
+                        <!-- Campo de Teléfono -->
+                        <label for="telefono" class="block text-gray-700  text-sm font-bold mb-2">Teléfono:</label>
+                        <input type="tel"
+                            class="shadow appearance-none border-gray-200 border rounded w-full py-2 px-3 text-gray-700 leading-tight hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4 hidden-element slide-in-left"
+                            id="telefono" name="telefono">
+                        <br><br>
+
+                        <!-- Campo de Mensaje -->
+                        <label for="mensaje" class="block text-gray-700  text-sm font-bold mb-2">Mensaje:</label>
+                        <textarea id="mensaje"
+                            class="shadow appearance-none border-gray-200 border rounded w-full py-2 px-3 text-gray-700 leading-tight hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4 hidden-element slide-in-left"
+                            name="mensaje" rows="4" cols="50" required></textarea>
+                        <br><br>
+
+                    </form>
+                </div>
+                <div class="flex flex-col h-full w-full items-start p-10 gap-2">
+                    <div class="flex flex-col">
+                        <span class="font-bold">Teléfono</span>
+                        <p class=""><span class="font-bold">(+57) </span>3222225268</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold">Correo electrónico</span>
+                        <p class="">darwin1212j@gmail.com</p>
+                    </div>
+                    <!-- Botón de Enviar -->
+                    <div class="flex justify-between w-full items-center">
+                        <button type="submit"
+                            class="p-3 border-2 rounded-xl hover:shadow-sm hover:bg-gray-100 hover:scale-95 transition-all focus:shadow-sm focus:bg-gray-100 focus:scale-95 focus:outline-2 focus:outline-gray-400 focus:outline-offset-4 zoom-in hidden-element">Enviar</button>
+                        <a href="https://github.com/Darwin12jj" class="w-15 zoom-in hidden-element" target="_blank">
+                            <img src="./images/github-color.svg" alt="GiHub" class="w-25" target="_blank"></a>
+                        <a href="#" class="w-20 zoom-in hidden-element"> <img src="./images/icons8-whatsapp-100.png"
+                                alt="WhatsApp" class="w-25"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="app.js"></script>
