@@ -119,6 +119,7 @@
         .proyecto-card {
             position: relative;
             overflow: hidden;
+            opacity: 1;
         }
         
         .proyecto-overlay {
@@ -165,7 +166,7 @@
         }
 
         .hamburger.open div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
 
         .hamburger.open div:nth-child(2) {
@@ -173,7 +174,58 @@
         }
 
         .hamburger.open div:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        /* Menú mobile profesional */
+        #mobileMenu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 100;
+            padding: 80px 30px 30px;
+        }
+        
+        #mobileMenu.open {
+            left: 0;
+        }
+        
+        #mobileMenu a {
+            display: block;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s;
+        }
+        
+        #mobileMenu a:hover {
+            padding-left: 10px;
+            color: #666;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
         }
 
         header {
@@ -197,7 +249,7 @@
 
         <nav class="flex justify-start sm:justify-center w-full bg-white z-50" id="sobremi">
             <!-- Icono de la hamburguesa (solo en mobile) -->
-            <div class="sm:hidden p-5">
+            <div class="sm:hidden p-5 fixed top-0 left-0 z-[101]">
                 <div class="hamburger cursor-pointer w-8 h-8 flex flex-col justify-between items-center transition-all"
                     onclick="toggleMenu()">
                     <div class="bg-black h-1 w-6 rounded-full"></div>
@@ -206,14 +258,16 @@
                 </div>
             </div>
 
+            <!-- Overlay oscuro -->
+            <div class="menu-overlay" onclick="toggleMenu()"></div>
+
             <!-- Menú desplegable en móvil -->
-            <div id="mobileMenu"
-                class="sm:hidden hidden-element zoom-in mt-4 space-y-4 text-black max-h-0 overflow-hidden opacity-0 transition-all duration-300">
-                <a href="#sobremi" class="block">Sobre mí</a>
-                <a href="#educacion" class="block">Educación</a>
-                <a href="#experiencia" class="block">Experiencia</a>
-                <a href="#proyectos" class="block">Proyectos</a>
-                <a href="#contacto" class="block">Contácto</a>
+            <div id="mobileMenu">
+                <a href="#sobremi" onclick="toggleMenu()">Sobre mí</a>
+                <a href="#educacion" onclick="toggleMenu()">Educación</a>
+                <a href="#experiencia" onclick="toggleMenu()">Experiencia</a>
+                <a href="#proyectos" onclick="toggleMenu()">Proyectos</a>
+                <a href="#contacto" onclick="toggleMenu()">Contacto</a>
             </div>
 
             <!-- Menú para pantallas grandes -->
@@ -241,14 +295,15 @@
                 <h2 class="font-bold mb-1 text-3xl text-center md:text-left">Sobre mí</h2>
                 <p class="text-gray-800 text-justify mt-5" id="texto-sobremi" style="opacity: 0;">Software Developer con enfoque en desarrollo frontend y móvil, con experiencia en la creación de aplicaciones utilizando React y React Native, integración de APIs REST para manejo de datos e internacionalización, y gestión de información mediante bases de datos SQL y MongoDB. Cuento con sólida experiencia en IT y soporte técnico, aportando en la administración de equipos de cómputo, diagnóstico y resolución de incidencias de hardware y software, estandarización de procesos mediante documentación técnica y optimización de flujos de información para reportes confiables.<br><br>
                     He contribuido a mejorar la estabilidad de las aplicaciones, reducir tiempos de respuesta en la atención de usuarios y fortalecer la comunicación entre áreas técnicas y operativas, destacándome por mi capacidad para resolver problemas, aprendizaje continuo y orientación a resultados.</p>
+            </div>
 
                 <div id="habilidades-programacion"
-                    class="my-16 mb-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-8 sm:gap-10 justify-items-center zoom-in hidden-element">
+                    class="my-16 mb-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-8 sm:gap-10 justify-items-center mx-auto zoom-in hidden-element">
                     <!-- HTML5 -->
                     <div class="flex flex-col items-center hover:scale-90 transition-all">
                         <svg class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 hover:drop-shadow-lg transition-all" viewBox="0 0 256 361" fill="none">
-                            <path d="M255.555 70.766l-23.241 260.36-104.47 28.962-104.182-28.922L.445 70.766h255.11z" fill="#E44D26"/>
-                            <path d="M128 337.95l84.417-23.403 19.86-222.49H128V337.95z" fill="#F16529"/>
+                            <path d="M255.555 70.766l-23.241 260.36-104.47 28.962-104.182-28.922L.445 70.766h255.11z" fill="#FF8A80"/>
+                            <path d="M128 337.95l84.417-23.403 19.86-222.49H128V337.95z" fill="#FF9E80"/>
                             <path d="M82.82 155.932H128v-31.937H47.917l.764 8.568 7.85 88.01H128v-31.937H85.739l-2.919-32.704zM90.018 236.542h-32.06l4.474 50.146 65.421 18.16.147-.04V271.58l-.14.037-35.568-9.604-2.274-25.471z" fill="#EBEBEB"/>
                             <path d="M24.18 0h16.23v16.035h14.847V0h16.231v48.558h-16.23v-16.26H40.411v16.26h-16.23V0zM92.83 16.103H78.544V0h44.814v16.103h-14.295v32.455h-16.23V16.103h-.001zM130.47 0h16.923l10.41 17.062L168.203 0h16.93v48.558h-16.164V24.49l-11.166 17.265h-.28L146.35 24.49v24.068h-15.88V0zM193.21 0h16.235v32.508h22.824v16.05h-39.06V0z" fill="#000"/>
                             <path d="M127.89 220.573h39.327l-3.708 41.42-35.62 9.614v33.226l65.473-18.145.48-5.396 7.506-84.08.779-8.576H127.89v31.937zM127.89 155.854v.078h77.143l.64-7.178 1.456-16.191.763-8.568H127.89v31.86z" fill="#FFF"/>
@@ -258,8 +313,8 @@
                     <!-- CSS3 -->
                     <div class="flex flex-col items-center hover:scale-90 transition-all">
                         <svg class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 hover:drop-shadow-lg transition-all" viewBox="0 0 256 361" fill="none">
-                            <path d="M127.844 360.088L23.662 331.166.445 70.766h255.11l-23.241 260.36-104.47 28.962z" fill="#264DE4"/>
-                            <path d="M212.417 314.547l19.86-222.49H128V337.95l84.417-23.403z" fill="#2965F1"/>
+                            <path d="M127.844 360.088L23.662 331.166.445 70.766h255.11l-23.241 260.36-104.47 28.962z" fill="#82B1FF"/>
+                            <path d="M212.417 314.547l19.86-222.49H128V337.95l84.417-23.403z" fill="#448AFF"/>
                             <path d="M53.669 188.636l2.862 31.937H128v-31.937H53.669zM47.917 123.995l2.903 31.937H128v-31.937H47.917zM128 271.58l-.14.037-35.568-9.604-2.274-25.471h-32.06l4.474 50.146 65.421 18.16.147-.04V271.58z" fill="#EBEBEB"/>
                             <path d="M60.484 0h38.68v16.176H76.66v16.176h22.506v16.175H60.484V0zM106.901 0h38.681v14.066h-22.505v2.813h22.505v32.352h-38.68V35.293h22.505v-2.813h-22.505V0zM153.319 0H192v14.066h-22.505v2.813H192v32.352h-38.681V35.293h22.505v-2.813H153.32V0z" fill="#000"/>
                             <path d="M202.127 188.636l5.765-64.641H127.89v31.937h45.002l-2.906 32.704H127.89v31.937h39.327l-3.708 41.42-35.62 9.614v33.226l65.473-18.145.48-5.396 7.506-84.08.779-8.576z" fill="#FFF"/>

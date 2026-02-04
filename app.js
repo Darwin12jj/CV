@@ -29,48 +29,38 @@ function filtrarProyectos(categoria, boton) {
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     if (boton) boton.classList.add('active');
     
-    // Animar salida
-    anime({
-        targets: '.proyecto-card',
-        opacity: [1, 0],
-        scale: [1, 0.8],
-        duration: 300,
-        easing: 'easeInQuad',
-        complete: function() {
-            // Filtrar proyectos
-            const proyectosFiltrados = categoria === 'todos' 
-                ? proyectos 
-                : proyectos.filter(p => p.categoria === categoria);
-            
-            // Renderizar
-            grid.innerHTML = proyectosFiltrados.map(p => `
-                <div class="proyecto-card" style="opacity: 0;">
-                    <div class="flex flex-col items-center p-6 bg-white border border-gray-200 rounded-lg transition-all hover:shadow-lg">
-                        <h5 class="mb-4 text-xl font-bold text-center text-gray-900">${p.titulo}</h5>
-                        <div class="relative w-full">
-                            <a href="${p.url}" target="_blank">
-                                <img src="${p.imagen}" alt="${p.titulo}" class="rounded-xl w-full hover:scale-105 transition-all">
-                            </a>
-                            <div class="proyecto-overlay">
-                                <a href="${p.url}" target="_blank" class="px-6 py-3 bg-white text-black rounded-lg font-bold hover:bg-gray-100 transition-all">
-                                    Ver Proyecto →
-                                </a>
-                            </div>
-                        </div>
+    // Filtrar proyectos
+    const proyectosFiltrados = categoria === 'todos' 
+        ? proyectos 
+        : proyectos.filter(p => p.categoria === categoria);
+    
+    // Renderizar
+    grid.innerHTML = proyectosFiltrados.map(p => `
+        <div class="proyecto-card">
+            <div class="flex flex-col items-center p-6 bg-white border border-gray-200 rounded-lg transition-all hover:shadow-lg">
+                <h5 class="mb-4 text-xl font-bold text-center text-gray-900">${p.titulo}</h5>
+                <div class="relative w-full">
+                    <a href="${p.url}" target="_blank">
+                        <img src="${p.imagen}" alt="${p.titulo}" class="rounded-xl w-full hover:scale-105 transition-all">
+                    </a>
+                    <div class="proyecto-overlay">
+                        <a href="${p.url}" target="_blank" class="px-6 py-3 bg-white text-black rounded-lg font-bold hover:bg-gray-100 transition-all">
+                            Ver Proyecto →
+                        </a>
                     </div>
                 </div>
-            `).join('');
-            
-            // Animar entrada
-            anime({
-                targets: '.proyecto-card',
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                delay: anime.stagger(100),
-                duration: 500,
-                easing: 'easeOutExpo'
-            });
-        }
+            </div>
+        </div>
+    `).join('');
+    
+    // Animar entrada
+    anime({
+        targets: '.proyecto-card',
+        opacity: [0, 1],
+        scale: [0.8, 1],
+        delay: anime.stagger(100),
+        duration: 500,
+        easing: 'easeOutExpo'
     });
 }
 
@@ -96,22 +86,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function toggleMenu() {
     const menu = document.getElementById('mobileMenu');
     const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.menu-overlay');
     
-    menu.classList.toggle('max-h-0');
-    menu.classList.toggle('opacity-0');
-    menu.classList.toggle('max-h-96');
-    menu.classList.toggle('opacity-100');
-    
+    menu.classList.toggle('open');
     hamburger.classList.toggle('open');
+    overlay.classList.toggle('open');
+    
+    // Prevenir scroll cuando el menú está abierto
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    const menu = document.getElementById('mobileMenu');
-    const hamburger = document.querySelector('.hamburger');
-    
-    menu.classList.add('max-h-0', 'opacity-0');
-    hamburger.classList.remove('open');
-    
     // Animación de iconos de tecnologías
     anime({
         targets: '#habilidades-programacion .flex',
@@ -303,9 +288,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const experienciaSection = document.getElementById('experiencia');
     if (experienciaSection) experienciaObserver.observe(experienciaSection.parentElement);
     
-    // Inicializar proyectos mostrando todos
-    filtrarProyectos('todos', document.querySelector('[data-filter="todos"]'));
-    
     // Sistema de navegación activa
     const sections = document.querySelectorAll('main, footer');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -416,4 +398,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             });
         });
     });
+    
+    // Inicializar proyectos mostrando todos
+    setTimeout(() => {
+        const botonTodos = document.querySelector('[data-filter="todos"]');
+        if (botonTodos) {
+            filtrarProyectos('todos', botonTodos);
+        }
+    }, 200);
 });
