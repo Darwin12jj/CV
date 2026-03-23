@@ -458,11 +458,15 @@
     <main class="mx-5 sm:mx-10 lg:mx-20 pb-10 flex flex-col justify-center hidden-element slide-in-left border-b-2">
         <div class="flex flex-col gap-5 h-auto pt-10 sm:pt-25 sm:gap-10 justify-center text-center">
             <h2 class="font-bold pl-5 text-3xl mb-5 text-left" id="proyectos">Proyectos</h2>
-            <div class="flex flex-col justify-center gap-5 sm:flex-row">
+            <div class="flex flex-col justify-center gap-5 sm:flex-row flex-wrap">
                 <button
                     class="p-3 border-2 rounded-xl transition-all filter-btn active"
                     data-filter="todos"
                     onclick="filtrarProyectos('todos', this)">Todos</button>
+                <button
+                    class="p-3 border-2 rounded-xl transition-all filter-btn"
+                    data-filter="recientes"
+                    onclick="filtrarProyectos('recientes', this)">🚀 Recientes <span class="text-sm text-gray-600">(6)</span></button>
                 <button
                     class="p-3 border-2 rounded-xl transition-all filter-btn"
                     data-filter="bootstrap"

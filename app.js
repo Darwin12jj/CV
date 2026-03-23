@@ -5,6 +5,12 @@ function showCards(category) {
 
 // Datos de proyectos
 const proyectos = [
+    { categoria: 'recientes', titulo: 'Libro Álbum', url: 'https://darwin12jj.github.io/Libro-Album/', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/Libro-Album', descripcion: 'Libro álbum digital interactivo' },
+    { categoria: 'recientes', titulo: 'Twilight Invitation', url: 'https://darwin12jj.github.io/Twilight-invitation/', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/Twilight-invitation', descripcion: 'Invitación digital temática' },
+    { categoria: 'recientes', titulo: 'Reminder', url: 'https://darwin12jj.github.io/Reminder/', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/Reminder', descripcion: 'App de recordatorios' },
+    { categoria: 'recientes', titulo: 'KW Shop', url: 'https://github.com/Darwin12jj/KW-Shop', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/KW-Shop', descripcion: 'Tienda online e-commerce' },
+    { categoria: 'recientes', titulo: 'To-Do List', url: 'https://darwin12jj.github.io/To-Do-List/', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/To-Do-List', descripcion: 'App de lista de tareas' },
+    { categoria: 'recientes', titulo: 'Landing React', url: 'https://darwin12jj.github.io/Landing-exercise-react/', imagen: 'https://opengraph.githubassets.com/1/Darwin12jj/Landing-exercise-react', descripcion: 'Landing page con React' },
     { categoria: 'bootstrap', titulo: 'Blog Example', url: 'https://darwin12jj.github.io/Blog-Example/', imagen: './images/bootstrap/Bootstrap-blog-example.png' },
     { categoria: 'bootstrap', titulo: 'List Group Example', url: 'https://darwin12jj.github.io/List_group-Example/#', imagen: './images/bootstrap/List_group-Example.png' },
     { categoria: 'bootstrap', titulo: 'Dropdowns Example', url: 'https://darwin12jj.github.io/Dropdowns-Example/#', imagen: './images/bootstrap/Dropdowns-Example.png' },
@@ -38,7 +44,8 @@ function filtrarProyectos(categoria, boton) {
     grid.innerHTML = proyectosFiltrados.map(p => `
         <div class="proyecto-card">
             <div class="flex flex-col items-center p-6 bg-white border border-gray-200 rounded-lg transition-all hover:shadow-lg">
-                <h5 class="mb-4 text-xl font-bold text-center text-gray-900">${p.titulo}</h5>
+                <h5 class="mb-2 text-xl font-bold text-center text-gray-900">${p.titulo}</h5>
+                ${p.descripcion ? `<p class="mb-4 text-sm text-gray-500 text-center">${p.descripcion}</p>` : '<div class="mb-4"></div>'}
                 <div class="relative w-full">
                     <a href="${p.url}" target="_blank">
                         <img src="${p.imagen}" alt="${p.titulo}" class="rounded-xl w-full hover:scale-105 transition-all">
